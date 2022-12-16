@@ -40,18 +40,18 @@ resource "aws_vpc" "my-vpc" {
  
 # SUBNET 1 (PUBLIC)
 resource "aws_subnet" "subnet1" {
-  cidr_block              = "10.0.0.0/18"
+  cidr_block              = "10.0.0.0/17"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "true"
   availability_zone       = data.aws_availability_zones.available.names[0]
 }
 
 # SUBNET 2 (PRIVATE)
-resource "aws_subnet" "pri_subnet1" {
-  cidr_block              = "10.0.0.0/18"
+resource "aws_subnet" "private_subnet1" {
+  cidr_block              = "10.0.0.0/17"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "false"
-  availability_zone       = data.aws_availability_zones.available.names[0]
+  availability_zone       = data.aws_availability_zones.available.names[1]
 }
  
 # INTERNET GATEWAY
