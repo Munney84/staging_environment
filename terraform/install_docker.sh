@@ -1,7 +1,10 @@
 #!/bin/bash
 
+#Clone Application Repo Onto Newly Created EC2
 export HOME=/home/ubuntu
 sudo -- bash -c 'echo "* * * * * ubuntu cd staging_environment/ && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main" >> /etc/crontab'
+sudo -- bash -c 'git remote add origin https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git'
+sudo -- bash -c 'git clone https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git'
 
 #Install Docker 
 sudo apt-get update
@@ -19,8 +22,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo apt install docker-compose -y 
 
-#Clone Application Repo Onto Newly Created EC2
-git remote add origin https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git
-git clone https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git
+
+
 
 
