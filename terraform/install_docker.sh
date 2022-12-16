@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo -- bash -c 'echo "* * * * * ubuntu cd staging_environment/ && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main" >> /etc/crontab'
+
 #Install Docker 
 sudo apt-get update
 sudo apt-get -y install \
