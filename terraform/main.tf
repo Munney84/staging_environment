@@ -14,7 +14,7 @@ resource "aws_instance" "web_server01" {
   subnet_id              = aws_subnet.subnet1.id
 
   tags = {
-    "Name" : "ifme-server-kevin"
+    "Name" : "staging-server"
   }
 
   user_data = "${file("install_docker.sh")}"
