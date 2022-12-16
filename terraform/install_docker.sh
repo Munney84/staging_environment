@@ -18,6 +18,6 @@ sudo apt install docker-compose -y
 
 #Clone Application Repo Onto Newly Created EC2
 cd
-https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git
+git clone https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git
 
 
