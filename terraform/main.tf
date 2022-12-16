@@ -14,7 +14,7 @@ resource "aws_instance" "web_server01" {
   subnet_id              = aws_subnet.subnet1.id
 
   tags = {
-    "Name" : "ifme-staging-server"
+    "Name" : "ifme-server-kevin"
   }
 
   user_data = "${file("install_docker.sh")}"
@@ -26,23 +26,26 @@ output "instance_ip" {
   
 }
 
+
 # VPC
 resource "aws_vpc" "my-vpc" {
-  cidr_block           = "33.33.0.0/16" 
+  cidr_block           = "10.0.0.0/17" #tyrones had 19 instead of 33, shouldn't matter tho?
   enable_dns_hostnames = "true"
  
   tags = {
-    "Name" : "staging-vpc"
+    "Name" : "ifme-vpc-kevin"
   }
 }
  
+ 
 # SUBNET 1 (PUBLIC)
 resource "aws_subnet" "subnet1" {
-  cidr_block              = "33.33.0.0/18"
+  cidr_block              = "10.0.0.0/17"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "true"
-  availability_zone       = data.aws_availability_zones.available.names[1]
+  availability_zone       = data.aws_availability_zones.available.names[0]
 }
+
  
 # INTERNET GATEWAY
 resource "aws_internet_gateway" "gw_1" {
@@ -63,8 +66,7 @@ resource "aws_route_table_association" "route-subnet1" {
   subnet_id      = aws_subnet.subnet1.id
   route_table_id = aws_route_table.route_table1.id
 }
-
-
+ 
 # DATA
 data "aws_availability_zones" "available" {
   state = "available"
