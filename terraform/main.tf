@@ -33,7 +33,7 @@ resource "aws_vpc" "my-vpc" {
   enable_dns_hostnames = "true"
  
   tags = {
-    "Name" : "ifme-vpc-kevin"
+    "Name" : "ifme-staging-vpc"
   }
 }
  
