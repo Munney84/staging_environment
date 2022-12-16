@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#TESTING 
+#TESTING 1234
 
 #Clone Application Repo Onto Newly Created EC2 and Cronjob
 export HOME=/home/ubuntu
