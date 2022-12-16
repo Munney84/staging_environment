@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on: [workflow_dispatch]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: log into DockerHub
+      run: docker login --username=${{ secrets.DOCKERHUB_UNAME }} --password=${{ secrets.DOCKERHUB_PW }}
+    - name: Build the Docker image
+      run: docker-compose build
+    - name: Change the tag of the app image
+      run: docker tag ifme_app:latest kingmant/ifmeorg:latest
+    - name: Push the app image to DockerHub
+      run: docker push kingmant/ifmeorg:latest
+    
+    - name: Build application DB
+      run: docker-compose run app rake db:create db:migrate 
+    - name: sleep before seeding
+      run: |
+        sleep 3
+        docker-compose run app rake db:seed
+    - name: Change the tag of the db image
+      run: docker tag postgres:9.6-alpine kingmant/ifmeorg-db:latest
+    - name: Push the db image to DockerHub
+      run: docker push kingmant/ifmeorg-db:latest
