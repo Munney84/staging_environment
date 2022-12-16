@@ -10,7 +10,8 @@ resource "aws_instance" "web_server01" {
   ami = "ami-08c40ec9ead489470"
   instance_type = "t2.medium"
   key_name = "ec2-key"
-  subnet_id              = "subnet-03a89e8d4ed37cd81"
+  vpc_security_group_ids = [aws_security_group.web_ssh.id]
+  subnet_id              = aws_subnet.subnet1.id
 
   tags = {
     "Name" : "ifme-staging-server"
@@ -25,14 +26,22 @@ output "instance_ip" {
   
 }
 
+# VPC
+resource "aws_vpc" "my-vpc" {
+  cidr_block           = "33.33.0.0/16" 
+  enable_dns_hostnames = "true"
  
+  tags = {
+    "Name" : "staging-vpc"
+  }
+}
  
 # SUBNET 1 (PUBLIC)
 resource "aws_subnet" "subnet1" {
-  cidr_block              = "10.0.0.0/18"
+  cidr_block              = "33.33.0.0/18"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "true"
-  availability_zone       = data.aws_availability_zones.available.names[0]
+  availability_zone       = data.aws_availability_zones.available.names[1]
 }
  
 # INTERNET GATEWAY
