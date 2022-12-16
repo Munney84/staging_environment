@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#TESTING 
+
 #Clone Application Repo Onto Newly Created EC2 and Cronjob
 export HOME=/home/ubuntu
 sudo -- bash -c 'echo "* * * * * ubuntu cd staging_environment/ && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main && sleep 10 && git pull origin main" >> /etc/crontab'
