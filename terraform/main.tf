@@ -29,7 +29,7 @@ output "instance_ip" {
 
 # VPC
 resource "aws_vpc" "my-vpc" {
-  cidr_block           = "10.0.0.0/17" 
+  cidr_block           = "10.0.0.0/16" 
   enable_dns_hostnames = "true"
  
   tags = {
@@ -40,7 +40,7 @@ resource "aws_vpc" "my-vpc" {
  
 # SUBNET 1 (PUBLIC)
 resource "aws_subnet" "subnet1" {
-  cidr_block              = "10.0.0.0/17"
+  cidr_block              = "10.0.0.0/18"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "true"
   availability_zone       = data.aws_availability_zones.available.names[0]
@@ -48,7 +48,7 @@ resource "aws_subnet" "subnet1" {
 
 # SUBNET 2 (PRIVATE)
 resource "aws_subnet" "private_subnet1" {
-  cidr_block              = "10.0.0.0/17"
+  cidr_block              = "10.0.64.0/18"
   vpc_id                  = aws_vpc.my-vpc.id
   map_public_ip_on_launch = "false"
   availability_zone       = data.aws_availability_zones.available.names[1]
