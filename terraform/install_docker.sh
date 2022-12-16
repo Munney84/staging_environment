@@ -16,8 +16,8 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo apt install docker-compose -y 
 
+#Clone Application Repo Onto Newly Created EC2
 cd
-
-
+https://github.com/KuraLabsCohort3-TeamEQ/staging_environment.git
 
 
